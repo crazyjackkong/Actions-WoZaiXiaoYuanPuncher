@@ -31,6 +31,10 @@ jobs:
         restore-keys: ${{ secrets.CACHE_NAME }}-
     - name: Run script
       env:
+        QYWX_ID: ${{secrets.QYWX_ID}}
+        QYWX_SECRET: ${{secrets.QYWX_SECRET}}
+        QYWX_AGENTID: ${{secrets.QYWX_AGENTID}}
+        QYWX_USER: ${{secrets.QYWX_USER}}
         DD_BOT_ACCESS_TOKEN: ${{secrets.DD_BOT_ACCESS_TOKEN}}
         DD_BOT_SECRET: ${{secrets.DD_BOT_SECRET}}
         SCT_KEY: ${{secrets.SCT_KEY}}
