@@ -301,7 +301,35 @@ class WoZaiXiaoYuanPuncher:
             }
             requests.post(baseurl, data=body)
             print("消息已通过 喵推送 进行通知，请检查推送结果")
+        if os.environ.get('QYWX_ID') and os.environ.get('QYWX_Secret') and os.environ.get('QYWX_Agentid') and os.environ('QYWX_User'):
+            useridstr = "|".join([os.environ('QYWX_User')])
+            agentid = os.environ.get('QYWX_Agentid')
+            corpid = os.environ.get('QYWX_ID')
+            corpsecret = os.environ.get('QYWX_Secret')
+            
+            response = requests.get(f"https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid={corpid}&corpsecret={corpsecret}")
+            data = json.loads(response.text)
+            access_token = data['access_token']
+            
+            _message = "我在校园打卡情况:\n" + notifyResult + "\n打卡时段:" + notifySeq + "\n打卡时间:" + notifyTime
 
+            json_dict = {
+               "touser" : useridstr,
+               "msgtype" : "text",
+               "agentid" : agentid,
+               "text" : {
+                   "content" : _message
+               },
+               "safe": 0,
+                "enable_id_trans": enable_id_trans,
+                "enable_duplicate_check": enable_duplicate_check,
+                "duplicate_check_interval": duplicate_check_interval
+            }
+            json_str = json.dumps(json_dict)
+            response_send = requests.post(f"https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token={access_token}", data=json_str)
+            if(json.loads(response_send.text)['errmsg'] == 'ok'):
+                print('企业微信发送成功')
+            
 
 if __name__ == "__main__":
     # 找不到cache，登录+打卡
