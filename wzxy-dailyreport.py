@@ -322,9 +322,9 @@ class WoZaiXiaoYuanPuncher:
                    "content" : _message
                },
                "safe": 0,
-                "enable_id_trans": enable_id_trans,
-                "enable_duplicate_check": enable_duplicate_check,
-                "duplicate_check_interval": duplicate_check_interval
+                "enable_id_trans": 1,
+                "enable_duplicate_check": 0,
+                "duplicate_check_interval": 1800
             }
             json_str = json.dumps(json_dict)
             response_send = requests.post(f"https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token={access_token}", data=json_str)
