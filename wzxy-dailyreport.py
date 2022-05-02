@@ -301,8 +301,8 @@ class WoZaiXiaoYuanPuncher:
             }
             requests.post(baseurl, data=body)
             print("消息已通过 喵推送 进行通知，请检查推送结果")
-        if os.environ.get('QYWX_ID') and os.environ.get('QYWX_Secret') and os.environ.get('QYWX_Agentid') and os.environ('QYWX_User'):
-            useridstr = "|".join([os.environ('QYWX_User')])
+        if os.environ.get('QYWX_ID') and os.environ.get('QYWX_Secret') and os.environ.get('QYWX_Agentid') and os.environ.get('QYWX_User'):
+            useridstr = "|".join([os.environ.get('QYWX_User')])
             agentid = os.environ.get('QYWX_Agentid')
             corpid = os.environ.get('QYWX_ID')
             corpsecret = os.environ.get('QYWX_Secret')
